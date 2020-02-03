@@ -12,42 +12,43 @@ losses of any kind, and assumes the rider is on flat ground.
 Unless otherwise noted all values are expressed in standard SI units
 """
 import matplotlib.pyplot as plt
-import numpy
 
-# initial values
 mass = 70.0
 powerOutput = 400.0
-initialVelocity = 1.0
-currentVelocity = initialVelocity
-theoreticalVelocity = initialVelocity
+dragCoefficient = 0.5
+crossSectionArea = 0.33
+airDensity = 1.2
+initialVelocity = 4.0
+losslessVelocity = initialVelocity
+dragVelocity = initialVelocity
 timeStep = 0.1
 maxTime = 200.0
 initialTime = 0.0
 currentTime = initialTime
-netForce = 0.0
-riderForce = 0.0
+
 
 timeDataList = []
-computationalVelocityDataList = []
-analyticalVelocityDataList = []
+losslessVelocityDataList = []
+dragVelocityDataList = []
 
 timeDataList.append(initialTime)
-computationalVelocityDataList.append(currentVelocity)
-analyticalVelocityDataList.append(theoreticalVelocity)
+losslessVelocityDataList.append(losslessVelocity)
+dragVelocityDataList.append(dragVelocity)
 
-# Euler loop
 while currentTime <= maxTime:
-    currentVelocity = currentVelocity + (powerOutput / (mass * currentVelocity)) * timeStep
-    theoreticalVelocity = numpy.sqrt(initialVelocity ** 2 + 2.0 * powerOutput * currentTime / mass)
+    losslessVelocity = losslessVelocity + (powerOutput / (mass * losslessVelocity)) * timeStep
+    dragVelocity = dragVelocity + ((powerOutput / (mass * dragVelocity)) - ((dragCoefficient * airDensity * crossSectionArea * dragVelocity**2)/(2*mass))) * timeStep
+
     currentTime = currentTime + timeStep
     timeDataList.append(currentTime)
-    computationalVelocityDataList.append(currentVelocity)
-    analyticalVelocityDataList.append(theoreticalVelocity)
-    # print(currentTime, currentVelocity, theoreticalVelocity)
+    losslessVelocityDataList.append(losslessVelocity)
+    dragVelocityDataList.append(dragVelocity)
+    #print(currentTime, losslessVelocity, dragVelocity)
+    print("\n")
 plt.xlabel("Time (sec)")
 plt.ylabel("Velocity (m/s)")
 plt.grid(True)
-plt.plot(timeDataList, computationalVelocityDataList, label="Computational")
-plt.plot(timeDataList, analyticalVelocityDataList, label="Theoretical")
-plt.legend(loc="center right")
+plt.plot(timeDataList, losslessVelocityDataList, label="without drag")
+plt.plot(timeDataList, dragVelocityDataList, label="with drag")
+plt.legend(loc="best")
 plt.show()
