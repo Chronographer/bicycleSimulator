@@ -25,67 +25,58 @@ timeStep = 0.1
 maxTime = 200.0
 initialTime = 0.0
 currentTime = initialTime
-
 tableIndex = 0
+
+
 timeDataList = []
 losslessVelocityDataList = []
 dragVelocityDataList = []
-massTable = [70, 75]
+massTable = [70]
 labelTable = []
+
+showLossless = False
+
 for i in range(0, len(massTable)):
     label = "mass = " + str(massTable[i]) + " kg"
     labelTable.append(label)
 
-showLossless = True
-showDrag = True
-
 while tableIndex <= len(massTable) - 1:
-
-    if showDrag == True:
-        while currentTime <= maxTime:
-            if currentTime == initialTime:
-                timeDataList.append(initialTime)
-                dragVelocityDataList.append(dragVelocity)
-            mass = massTable[tableIndex]
-            dragVelocity = dragVelocity + ((powerOutput / (mass * dragVelocity)) - ((dragCoefficient * airDensity * crossSectionArea * dragVelocity**2)/(2*mass))) * timeStep
+    while currentTime <= maxTime:
+        if currentTime == initialTime:
+            timeDataList.append(initialTime)
             dragVelocityDataList.append(dragVelocity)
-            currentTime = currentTime + timeStep
-            timeDataList.append(currentTime)
-            #print(currentTime, dragVelocity)
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex])
-        tableIndex = tableIndex + 1
-        currentTime = initialTime
-        dragVelocity = initialVelocity
-        dragVelocityDataList.clear()
-        timeDataList.clear()
-
-    if showLossless == True:
-        while currentTime <= maxTime:
-            if currentTime == initialTime:
-                timeDataList.append(initialTime)
+            if showLossless == True:
                 losslessVelocityDataList.append(losslessVelocity)
-            mass = massTable[tableIndex]
+
+        mass = massTable[tableIndex]
+        dragVelocity = dragVelocity + ((powerOutput / (mass * dragVelocity)) - ((dragCoefficient * airDensity * crossSectionArea * dragVelocity**2)/(2*mass))) * timeStep
+        currentTime = currentTime + timeStep
+        dragVelocityDataList.append(dragVelocity)
+        timeDataList.append(currentTime)
+        if showLossless == True:
             losslessVelocity = losslessVelocity + (powerOutput / (mass * losslessVelocity)) * timeStep
             losslessVelocityDataList.append(losslessVelocity)
-            currentTime = currentTime + timeStep
-            timeDataList.append(currentTime)
-            #print(currentTime, losslessVelocity)
+            #print(currentTime, losslessVelocity, dragVelocity)
+
+    if showLossless == True:
         plt.plot(timeDataList, losslessVelocityDataList, label=labelTable[tableIndex])
-        tableIndex = tableIndex + 1
-        currentTime = initialTime
+        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex] + " with drag")
+
         losslessVelocity = initialVelocity
         losslessVelocityDataList.clear()
-        timeDataList.clear()
+    else:
+        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex])
 
+    tableIndex = tableIndex + 1
+    currentTime = initialTime
+    dragVelocity = initialVelocity
+    dragVelocityDataList.clear()
+    timeDataList.clear()
 
-if showLossless == True and showDrag == True:
-    plt.suptitle("Velocity vs. Time (drag and lossless)")
-elif showLossless == True and showDrag == False:
-    plt.suptitle("Velocity vs. Time (lossless only)")
-elif showLossless == False and showDrag == True:
-    plt.suptitle("Velocity vs. Time (drag only")
+if showLossless == True:
+    plt.suptitle("Velocity vs. Time")
 else:
-    plt.suptitle("Congratulations! You made an empty graph!")
+    plt.suptitle("Velocity vs. Time (drag only)")
 plt.xlabel("Time (sec)")
 plt.ylabel("Velocity (m/s)")
 plt.legend(loc="best")
