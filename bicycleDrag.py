@@ -31,8 +31,12 @@ tableIndex = 0
 timeDataList = []
 losslessVelocityDataList = []
 dragVelocityDataList = []
-massTable = [70, 75, 100, 120]
-lableTable = ["mass = " + str(massTable[0]) + " kg", "mass = " + str(massTable[1]) + " kg", "mass = " + str(massTable[2]) + " kg", "mass = " + str(massTable[3]) + " kg"]
+massTable = [70, 75, 100, 65, 200, 645]
+labelTable = []
+
+for i in range(0, len(massTable)):
+    label = "mass = " + str(massTable[i]) + " kg"
+    labelTable.append(label)
 
 while tableIndex <= len(massTable) - 1:
     while currentTime <= maxTime:
@@ -50,8 +54,8 @@ while tableIndex <= len(massTable) - 1:
         dragVelocityDataList.append(dragVelocity)
         #print(currentTime, losslessVelocity, dragVelocity)
 
-    plt.plot(timeDataList, losslessVelocityDataList, label=lableTable[tableIndex])
-    plt.plot(timeDataList, dragVelocityDataList, label=lableTable[tableIndex] + " with drag")
+    plt.plot(timeDataList, losslessVelocityDataList, label=labelTable[tableIndex])
+    plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex] + " with drag")
 
     tableIndex = tableIndex + 1
     currentTime = initialTime
