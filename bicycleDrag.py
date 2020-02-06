@@ -1,25 +1,22 @@
 """
 Written by Daniel Isenberg in Intellij Idea using Python community plugin.
 1-31-2020
-Bicycle motion simulator: Predicts the velocity of a bicycle and rider given
-the mass of the bike and rider, the sustained power produced by the rider, and
-the initial velocity of the bike and rider using a numerical approach. Also
-simultaneously computes the velocity of the bike and rider using an analytical
-method at each time step. Program will then graph the two lists of data points
-against each other. This program does not account for any wind resistance or
-losses of any kind, and assumes the rider is on flat ground.
+Bicycle motion simulator: Uses a numerical approach to predict and plot the
+velocity of a bicycle and rider for a period of time given the mass of the
+bike and rider, the sustained power produced by the rider, the initial
+velocity of the bike and rider, the bike and riders cross sectional area,
+the air density, and the drag coefficient of the bike and rider.
 
+This program assumes the rider is on flat ground.
 Unless otherwise noted all values are expressed in standard SI units
 """
 import matplotlib.pyplot as plt
-
 
 powerOutput = 400.0
 dragCoefficient = 0.5
 crossSectionArea = 0.33
 airDensity = 1.2
 initialVelocity = 4.0
-losslessVelocity = initialVelocity
 dragVelocity = initialVelocity
 timeStep = 0.1
 maxTime = 200.0
@@ -27,15 +24,10 @@ initialTime = 0.0
 currentTime = initialTime
 tableIndex = 0
 
-
 timeDataList = []
-losslessVelocityDataList = []
 dragVelocityDataList = []
-massTable = [70]
+massTable = [70, 75, 399]
 labelTable = []
-
-showLossless = False
-
 for i in range(0, len(massTable)):
     label = "mass = " + str(massTable[i]) + " kg"
     labelTable.append(label)
@@ -45,27 +37,14 @@ while tableIndex <= len(massTable) - 1:
         if currentTime == initialTime:
             timeDataList.append(initialTime)
             dragVelocityDataList.append(dragVelocity)
-            if showLossless == True:
-                losslessVelocityDataList.append(losslessVelocity)
 
         mass = massTable[tableIndex]
         dragVelocity = dragVelocity + ((powerOutput / (mass * dragVelocity)) - ((dragCoefficient * airDensity * crossSectionArea * dragVelocity**2)/(2*mass))) * timeStep
         currentTime = currentTime + timeStep
         dragVelocityDataList.append(dragVelocity)
         timeDataList.append(currentTime)
-        if showLossless == True:
-            losslessVelocity = losslessVelocity + (powerOutput / (mass * losslessVelocity)) * timeStep
-            losslessVelocityDataList.append(losslessVelocity)
-            #print(currentTime, losslessVelocity, dragVelocity)
-
-    if showLossless == True:
-        plt.plot(timeDataList, losslessVelocityDataList, label=labelTable[tableIndex])
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex] + " with drag")
-
-        losslessVelocity = initialVelocity
-        losslessVelocityDataList.clear()
-    else:
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex])
+        #print(currentTime, dragVelocity)
+    plt.plot(timeDataList, dragVelocityDataList, label=labelTable[tableIndex])
 
     tableIndex = tableIndex + 1
     currentTime = initialTime
@@ -73,10 +52,7 @@ while tableIndex <= len(massTable) - 1:
     dragVelocityDataList.clear()
     timeDataList.clear()
 
-if showLossless == True:
-    plt.suptitle("Velocity vs. Time")
-else:
-    plt.suptitle("Velocity vs. Time (drag only)")
+plt.suptitle("Bicycle Velocity vs. Time")
 plt.xlabel("Time (sec)")
 plt.ylabel("Velocity (m/s)")
 plt.legend(loc="best")
