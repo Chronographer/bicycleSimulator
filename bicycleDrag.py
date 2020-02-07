@@ -13,7 +13,7 @@ Unless otherwise noted all values are expressed in standard SI units
 import matplotlib.pyplot as plt
 
 powerOutput = 400.0
-dragCoefficient = 0.5
+dragCoefficient = 1.0
 crossSectionArea = 0.33
 airDensity = 1.2
 initialVelocity = 4.0
@@ -26,9 +26,9 @@ tableIndex = 0
 
 timeDataList = []
 dragVelocityDataList = []
-massTable = [70, 75, 399]
+massTable = [60, 70, 80]
 labelTable = []
-for i in range(0, len(massTable)):
+for i in range(0, len(massTable)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
     label = "mass = " + str(massTable[i]) + " kg"
     labelTable.append(label)
 
