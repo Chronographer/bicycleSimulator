@@ -19,7 +19,7 @@ def bicycleLossless():
     powerOutput = 400.0
     initialVelocity = 4.0
     initialTime = 0.0
-    maxTime = 90.0
+    maxTime = 60.0
     timeStep = 0.1
 
     currentVelocity = initialVelocity
@@ -44,4 +44,4 @@ def bicycleLossless():
         #print(currentTime, currentVelocity, theoreticalVelocity) # uncomment this line to print out the results to the terminal.
     plt.suptitle("Analytical vs. computational calculation of bicycle speed")
     plt.plot(timeDataList, computationalVelocityDataList, label="Computational")
-    plt.plot(timeDataList, analyticalVelocityDataList, label="Theoretical")
+    #plt.plot(timeDataList, analyticalVelocityDataList, label="Theoretical")

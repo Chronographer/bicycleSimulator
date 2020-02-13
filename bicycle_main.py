@@ -1,11 +1,13 @@
-import bicycleDrag
+import bicycleDragMass
 import bicycle_lossless
+import bicycleDragArea
 import matplotlib.pyplot as plt
 
-bicycleDrag.bicycleDrag()
-bicycle_lossless.bicycleLossless()
+#bicycleDragMass.bicycleMass()
+bicycleDragArea.bicycleArea()
+#bicycle_lossless.bicycleLossless()
 
-plt.suptitle("Bicycle Velocity vs. Time")
+plt.suptitle("Bicycle velocity with varying area")
 plt.xlabel("Time (sec)")
 plt.ylabel("Velocity (m/s)")
 plt.legend(loc="best")

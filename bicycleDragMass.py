@@ -11,7 +11,7 @@ This program assumes the rider is on flat ground.
 Unless otherwise noted all values are expressed in standard SI units
 """
 
-def bicycleDrag():
+def bicycleMass():
     import matplotlib.pyplot as plt
 
     powerOutput = 400.0
@@ -21,14 +21,14 @@ def bicycleDrag():
     initialVelocity = 4.0
     dragVelocity = initialVelocity
     timeStep = 0.1
-    maxTime = 90.0
+    maxTime = 60.0
     initialTime = 0.0
 
     currentTime = initialTime
 
     timeDataList = []
     dragVelocityDataList = []
-    massTable = [70.0]
+    massTable = [65.0, 70.0, 75.0, 80.0]
     labelTable = []
     for i in range(0, len(massTable)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
         label = "mass = " + str(massTable[i]) + " kg"
