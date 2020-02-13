@@ -21,13 +21,20 @@ def bicycleArea():
     initialVelocity = 4.0
     dragVelocity = initialVelocity
     timeStep = 0.1
-    maxTime = 60.0
+    maxTime = 120.0
     initialTime = 0.0
     currentTime = initialTime
 
     timeDataList = []
     dragVelocityDataList = []
-    areaTable = [0.33, 0.10]
+    finalSpeedList = []
+    areaTable = []
+    counter = 0
+
+    while counter <= 10.0: # Used to populate the areaTable with values that get increasingly larger
+        areaTable.append(counter)
+        counter = counter + 0.02
+
     labelTable = []
     for i in range(0, len(areaTable)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
         label = "cross section = " + str(areaTable[i]) + " m^2"
@@ -45,9 +52,12 @@ def bicycleArea():
             currentTime = currentTime + timeStep
             dragVelocityDataList.append(dragVelocity)
             timeDataList.append(currentTime)
-            # print(currentTime, dragVelocity)
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[i])
+            if currentTime >= maxTime:
+                #print("cross section is: " + str(areaTable[i]) + ". Time is: " + str(currentTime) + ". Final velocity is: " + str(dragVelocity))
+                finalSpeedList.append(dragVelocity)
+        #plt.plot(timeDataList, dragVelocityDataList, label=labelTable[i])
         currentTime = initialTime
         dragVelocity = initialVelocity
         dragVelocityDataList.clear()
         timeDataList.clear()
+    plt.plot(areaTable, finalSpeedList)
