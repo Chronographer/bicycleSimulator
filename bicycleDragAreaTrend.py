@@ -29,7 +29,12 @@ def run():
     timeDataList = []
     dragVelocityDataList = []
     finalSpeedList = []
-    areaTable = [0.33, 0.1]
+    areaTable = []
+    counter = 0
+
+    while counter <= 10.0: # Used to populate the areaTable with values that get increasingly larger
+        areaTable.append(counter)
+        counter = counter + 0.02
 
     labelTable = []
     for i in range(0, len(areaTable)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
@@ -51,10 +56,10 @@ def run():
             if currentTime >= maxTime:
                 #print("cross section is: " + str(areaTable[i]) + ". Time is: " + str(currentTime) + ". Final velocity is: " + str(dragVelocity))
                 finalSpeedList.append(dragVelocity)
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[i])
+        #plt.plot(timeDataList, dragVelocityDataList, label=labelTable[i])
         currentTime = initialTime
         dragVelocity = initialVelocity
         dragVelocityDataList.clear()
         timeDataList.clear()
-    #plt.plot(areaTable, finalSpeedList, label="mass: 70 kg\npower: 400 watts\ndrag coefficient: 1\nair density: 1.2 kg/m^3\ntime step: 0.1 seconds")
+    plt.plot(areaTable, finalSpeedList, label="mass: 70 kg\npower: 400 watts\ndrag coefficient: 1\nair density: 1.2 kg/m^3\ntime step: 0.1 seconds")
 

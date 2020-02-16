@@ -11,6 +11,7 @@ This program assumes the rider is on flat ground.
 Unless otherwise noted all values are expressed in standard SI units
 """
 
+
 def bicycleMass():
     import matplotlib.pyplot as plt
 
