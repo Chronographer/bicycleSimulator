@@ -22,7 +22,7 @@ def run():
     initialVelocity = 4.0
     dragVelocity = initialVelocity
     timeStep = 0.1
-    maxTime = 120.0
+    maxTime = 150.0
     initialTime = 0.0
     currentTime = initialTime
 
@@ -30,6 +30,7 @@ def run():
     dragVelocityDataList = []
     finalSpeedList = []
     areaTable = [0.33, 0.1]
+    descriptionTable = ["Leading cyclist", "Trailing cyclist"]
 
     labelTable = []
     for i in range(0, len(areaTable)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
@@ -51,7 +52,7 @@ def run():
             if currentTime >= maxTime:
                 #print("cross section is: " + str(areaTable[i]) + ". Time is: " + str(currentTime) + ". Final velocity is: " + str(dragVelocity))
                 finalSpeedList.append(dragVelocity)
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[i])
+        plt.plot(timeDataList, dragVelocityDataList, label=descriptionTable[i] + " (" + labelTable[i] + ")")
         currentTime = initialTime
         dragVelocity = initialVelocity
         dragVelocityDataList.clear()
