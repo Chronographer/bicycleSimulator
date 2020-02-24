@@ -15,7 +15,7 @@ def run():
     powerList = []
     areaTable = []
     areaTablePopulator = 0.01
-    while areaTablePopulator < 0.7:
+    while areaTablePopulator < 0.34:
         areaTable.append(areaTablePopulator)
         areaTablePopulator = areaTablePopulator + 0.01
 
@@ -31,7 +31,7 @@ def run():
                 if dragVelocity >= targetSpeed:
                     finalSpeedList.append(dragVelocity)
                     powerList.append(powerOutput)
-                    #print("power is: " + str(powerOutput) + ". final speed is: " + str(dragVelocity) + ". current area is: " + str(crossSectionArea))
+                    print("power is: " + str(powerOutput) + ". final speed is: " + str(dragVelocity) + ". current area is: " + str(crossSectionArea))
                 if dragVelocity < targetSpeed:
                     #print("target velocity not reached! power is: " + str(powerOutput) + ". current velocity is: " + str(dragVelocity) + ". currentTime is: " + str(currentTime) + ". current area is: " + str(crossSectionArea))
                     powerOutput = powerOutput + 1
