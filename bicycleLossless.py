@@ -1,15 +1,15 @@
 """
 Written by Daniel Isenberg in Intellij Idea using Python community plugin.
 1-31-2020
-Bicycle motion simulator: Predicts the velocity of a bicycle and rider given
-the mass of the bike and rider, the sustained power produced by the rider, and
-the initial velocity of the bike and rider using a numerical approach. Also
-simultaneously computes the velocity of the bike and rider using an analytical
-method at each time step. Program will then graph the two lists of data points
-against each other. This program does not account for any wind resistance or
-losses of any kind, and assumes the rider is on flat ground.
+Full project repository is available at https://github.com/Chronographer/bicycleSimulator
 
-Unless otherwise noted all values are expressed in standard SI units
+DEPRECATED: use "bicycle_lossless.py" instead. This file is included only for the sake of completeness, and can not
+be called from bicycle_main.py the way the other files can. It is functionally equivalent to "bicycle_lossless.py"
+
+Bicycle motion simulator: Predicts the velocity of a bicycle and rider given the mass of the bike and rider, the
+sustained power produced by the rider, and the initial velocity of the bike and rider using a numerical approach. Also
+simultaneously computes the velocity of the bike and rider using an analytical method at each time step. Program will
+then graph the two lists of data points against each other.
 """
 import matplotlib.pyplot as plt
 import numpy

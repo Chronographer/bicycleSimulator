@@ -1,18 +1,14 @@
 """
 Written by Daniel Isenberg in Intellij Idea using Python community plugin.
-1-31-2020
-Bicycle motion simulator: Uses a numerical approach to predict and plot the
-velocity of a bicycle and rider for a period of time given the mass of the
-bike and rider, the sustained power produced by the rider, the initial
-velocity of the bike and rider, the bike and riders cross sectional area,
-the air density, and the drag coefficient of the bike and rider.
+Full project repository is available at https://github.com/Chronographer/bicycleSimulator
 
-This program assumes the rider is on flat ground.
-Unless otherwise noted all values are expressed in standard SI units
+This function computes the velocity of a bicycle over time (taking atmospheric drag into consideration) given a
+sustained power output, a drag coefficient, the cross sectional area of the system, the density of the air, and the
+initial velocity of the system.
 """
 
 
-def bicycleMass():
+def run():
     import matplotlib.pyplot as plt
 
     powerOutput = 400.0
@@ -29,26 +25,25 @@ def bicycleMass():
 
     timeDataList = []
     dragVelocityDataList = []
-    massTable = [65.0, 70.0, 75.0, 80.0]
-    labelTable = []
-    for i in range(0, len(massTable)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
-        label = "mass = " + str(massTable[i]) + " kg"
-        labelTable.append(label)
+    massList = [65.0, 70.0, 75.0, 80.0]
+    labelList = []
+    for i in range(0, len(massList)):  # This automatically populates the table that holds the labels for each line shown in the plot with both the correct number of elements and the values for each of those elements.
+        label = "mass = " + str(massList[i]) + " kg"
+        labelList.append(label)
 
-    for i in range(0, len(massTable)):
+    for i in range(0, len(massList)):
         while currentTime <= maxTime:
             if currentTime == initialTime:
                 timeDataList.append(initialTime)
                 dragVelocityDataList.append(dragVelocity)
 
-            mass = massTable[i]
-
+            mass = massList[i]
             dragVelocity = dragVelocity + ((powerOutput / (mass * dragVelocity)) - ((dragCoefficient * airDensity * crossSectionArea * dragVelocity**2)/(2*mass))) * timeStep
             currentTime = currentTime + timeStep
             dragVelocityDataList.append(dragVelocity)
             timeDataList.append(currentTime)
             # print(currentTime, dragVelocity)
-        plt.plot(timeDataList, dragVelocityDataList, label=labelTable[i])
+        plt.plot(timeDataList, dragVelocityDataList, label=labelList[i])
         currentTime = initialTime
         dragVelocity = initialVelocity
         dragVelocityDataList.clear()
