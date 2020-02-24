@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 #bicycle_lossless.bicycleLossless()
 bicycleDragPowerSearch.run()
 
-plt.suptitle("Comparison of terminal velocities between leading and trailing cyclists")
-plt.xlabel("Time (sec)")
-plt.ylabel("Velocity (m/s)")
+plt.suptitle("Power required to reach a speed of 13 m/s as area increases")
+plt.xlabel("Power required to reach speed of 13 m/s (watts)")
+plt.ylabel("Cross sectional area (m^2)")
 plt.legend(loc="best")
 #plt.legend(fontsize="small")
 plt.grid()
