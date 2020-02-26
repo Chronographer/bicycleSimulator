@@ -1,5 +1,5 @@
 """
-Written by Daniel Isenberg in Intellij Idea using Python community plugin.
+Written by Daniel Isenberg in Intellij Idea using the Python community plugin.
 Full project repository is available at https://github.com/Chronographer/bicycleSimulator
 
 This function identifies how much power is required for a system to reach a velocity of targetVelocity within maxTime

@@ -1,5 +1,5 @@
 """
-Written by Daniel Isenberg in Intellij Idea using Python community plugin.
+Written by Daniel Isenberg in Intellij Idea using the Python community plugin.
 Full project repository is available at https://github.com/Chronographer/bicycleSimulator
 
 This file serves as a single location from which all other components of this project can be easily called by changing

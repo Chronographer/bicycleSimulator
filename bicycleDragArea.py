@@ -1,5 +1,5 @@
 """
-Written by Daniel Isenberg in Intellij Idea using Python community plugin.
+Written by Daniel Isenberg in Intellij Idea using the Python community plugin.
 Full project repository is available at https://github.com/Chronographer/bicycleSimulator
 
 This function computes the velocity over time for multiple systems with different cross sectional areas. A plot of
